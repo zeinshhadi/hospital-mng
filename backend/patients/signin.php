@@ -1,31 +1,46 @@
 <?php
-header('Access-Control-Allow-Origin:*');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Credentials: true');
 include("../connection.php");
-$email = $_POST['email'];
-$password = $_POST['password'];
 
-$query=$mysqli->prepare('select patient_id,first_name,password from patients where email=?');
-$query->bind_param('s',$email);
-$query->execute();
-$query->store_result();
-$num_rows=$query->num_rows;
-$query->bind_result($id,$name,$hashed_password);
 
-$query->fetch();
-$response=[];
-if($num_rows== 0){
-    $response['status']= 'user not found';
-    echo json_encode($response);
-} else {
+$json_data = file_get_contents("php://input");
+$data = json_decode($json_data, true);
+if (isset($data["email"], $data["password"])) {
 
-    if(password_verify($password,$hashed_password)){
+    $email = $data["email"];
+    $password = $data["password"];
+$query = $mysqli->prepare("select patients_id, first_name,email, password,role_id FROM patients WHERE email = ?");
+    $query->bind_param('s', $email);
+    $query->execute();
+    $query->store_result();
+    $num_row = $query->num_rows;
+    $query->bind_result($id, $name, $email, $hashed_password,$role);
+    $query->fetch();
 
-        $response['status']= 'logged in';
-        $response['id_patient']=$id;
-        $response['first_name']=$name;
-        echo json_encode($response);
-    } else {
-        $response['status']= 'wrong credentials';
-        echo json_encode($response);
+    $response = [];
+
+    if ($num_row == 0) {
+        $response['status'] = 'error';
+        $response['message'] = 'User not found';
+    } else 
+   
+ {
+        if (password_verify($password, $hashed_password)) {
+            $response['status'] = 'success';
+            $response['user_id'] = $id;
+            $response['name'] = $name;
+            $response["role"]=$role;
+        } else {
+            $response['status'] = 'error';
+            $response['message'] = 'Wrong inputs';
+        }
     }
-};
+} else {
+    $response['status'] = 'error';
+    $response['message'] = 'Invalid data format';
+}
+
+echo json_encode($response);
+?>
