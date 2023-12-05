@@ -1,17 +1,14 @@
 <?php
-
 include("../connection.php");
 
 $response = [];
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $doctorId = isset($_GET['id']) ? intval($_GET['id']) : 0;
-
+echo $doctorId;
     if ($doctorId > 0) {
         $query = $mysqli->prepare('DELETE FROM doctors WHERE doctor_id = ?');
         $query->bind_param('i', $doctorId);
-        echo $doctorId;
         $query->execute();
 
         if ($query->affected_rows > 0) {
@@ -31,6 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $response['status'] = 'error';
     $response['message'] = 'Invalid request method';
 }
+
+
+header('Content-Type: application/json');
+
+
+error_log("Response: " . json_encode($response));
 
 echo json_encode($response);
 ?>

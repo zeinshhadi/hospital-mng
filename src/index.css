@@ -7,3 +7,8 @@ body {
 .d-flex {
   display: flex;
 }
+
+.d-spacearound {
+  justify-content: space-around;
+  align-items: center;
+}

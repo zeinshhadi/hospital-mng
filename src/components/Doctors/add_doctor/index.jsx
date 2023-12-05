@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import GetDoctors from "../get_doctors";
 
-const CreateUser = () => {
+const CreateDoctor = () => {
   const [inputs, setInputs] = useState({
     first_name: "",
     last_name: "",
@@ -61,9 +60,8 @@ const CreateUser = () => {
         <input type="text" name="specialization" onChange={handleChange} />
         <button>Save</button>
       </form>
-      <GetDoctors />
     </div>
   );
 };
 
-export default CreateUser;
+export default CreateDoctor;

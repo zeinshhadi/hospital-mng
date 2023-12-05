@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import GetPatients from "../get_patients";
+
 import "./index.css";
-import DoctorsList from "../admin/DoctorsList";
+
 const LogIn = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -13,21 +13,18 @@ const LogIn = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData);
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost/hospital-mng/backend/patients/signin.php", formData);
+      const response = await axios.post("http://localhost/hospital-mng/backend/doctors/signin_doctor.php", formData);
       console.log(response.data);
       if (response.data.status === "success") {
-        if (response.data.role === 1) {
-          console.log(response.data.role);
-          navigate("/patient/Info");
-        }
-      } else {
-        navigate("user/create");
+        console.log(response.data.role);
+        navigate("/doctor/Info");
       }
     } catch (error) {
       console.error("Error during form submission:", error);
@@ -47,11 +44,10 @@ const LogIn = () => {
       </form>
       <p>
         Don't have an account?{" "}
-        <a href="/user/create" className="signup-link">
+        <a href="/doctor/create" className="signup-link">
           Sign up
         </a>
       </p>
-      <DoctorsList />
     </div>
   );
 };

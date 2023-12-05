@@ -27,9 +27,12 @@ const DoctorsList = () => {
       return;
     }
 
+    console.log("Deleting doctor with ID:", doctorId);
+
     axios
-      .delete(`http://localhost/hospital-mng/backend/doctors/delete_doctors.php?id=${doctorId}`)
+      .delete(`http://localhost/hospital-mng/backend/admin/delete_doctor.php?id=${doctorId}`)
       .then(function (res) {
+        console.log("Response from server:", res.data);
         console.log("Doctor deleted successfully");
 
         setDoctors(doctors.filter((doctor) => doctor.doctor_id !== doctorId));
