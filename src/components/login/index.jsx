@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import GetPatients from "../get_patients";
-
+import "./index.css";
+import DoctorsList from "../admin/DoctorsList";
 const LogIn = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -24,8 +25,6 @@ const LogIn = () => {
         if (response.data.role === 1) {
           console.log(response.data.role);
           navigate("/patient/Info");
-        } else if (response.data.role === 2) {
-          console.log("hellooz");
         }
       } else {
         navigate("user/create");
@@ -36,8 +35,8 @@ const LogIn = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
+    <div className="container">
+      <form onSubmit={handleLogin} className="form-container">
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" onChange={handleChange} required />
 
@@ -46,7 +45,13 @@ const LogIn = () => {
 
         <button type="submit">Login</button>
       </form>
-      <GetPatients />
+      <p>
+        Don't have an account?{" "}
+        <a href="/user/create" className="signup-link">
+          Sign up
+        </a>
+      </p>
+      <DoctorsList />
     </div>
   );
 };

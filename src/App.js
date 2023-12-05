@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import ListPatients from "./components/list_user/ListPatients";
 import CreateUser from "./components/create_user/CreateUser";
 import LogIn from "./components/login";
 import PatientsInfo from "./components/patients_info/PatientsInfo";
+import CreateDoctor from "./components/add_doctor";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/">Log In</Link>
@@ -18,10 +18,11 @@ function App() {
               <Link to="user/create">Create Patients</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
+
         <Routes>
           <Route index element={<LogIn />} />
-          <Route path="user/create" element={<CreateUser />} />
+          <Route path="user/create" element={<CreateDoctor />} />
           <Route path="patient/Info" element={<PatientsInfo />} />
         </Routes>
       </BrowserRouter>
