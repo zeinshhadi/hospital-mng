@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import CreateUser from "./components/patients/create_user/CreateUser";
 import LogIn from "./components/patients/login";
@@ -10,7 +10,7 @@ import Landing from "./components/landing/Landing";
 import CreateDoctor from "./components/Doctors/add_doctor/index";
 import DoctorsInfo from "./components/Doctors/doctors_info/DoctorsInfo";
 import AdminInfo from "./components/admin/admin_info/AdminInfo";
-
+import CreateApp from "./components/patients/appointment/CreateApp";
 function App() {
   return (
     <div className="App">
@@ -22,9 +22,10 @@ function App() {
           <Route path="/login/admin" element={<LogInAdmin />} />
           <Route path="user/create" element={<CreateUser />} />
           <Route path="/doctor/create" element={<CreateDoctor />} />
-          <Route path="patient/Info" element={<PatientsInfo />} />
-          <Route path="doctor/info" element={<DoctorsInfo />} />
-          <Route path="admin/info" element={<AdminInfo />} />
+          <Route path="/:id/patient/Info" element={<PatientsInfo />} />
+          <Route path="/doctor/info" element={<DoctorsInfo />} />
+          <Route path="/admin/info" element={<AdminInfo />} />
+          <Route path="/:id/appointment" element={<CreateApp />} />
         </Routes>
       </BrowserRouter>
     </div>

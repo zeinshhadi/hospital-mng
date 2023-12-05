@@ -22,12 +22,8 @@ const LogIn = () => {
       const response = await axios.post("http://localhost/hospital-mng/backend/patients/signin.php", formData);
       console.log(response.data);
       if (response.data.status === "success") {
-        if (response.data.role === 1) {
-          console.log(response.data.role);
-          navigate("/patient/Info");
-        }
-      } else {
-        navigate("user/create");
+        console.log(response.data.role);
+        navigate(`/${response.data.user_id}/patient/Info/`);
       }
     } catch (error) {
       console.error("Error during form submission:", error);
