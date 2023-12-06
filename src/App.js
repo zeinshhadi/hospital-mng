@@ -23,7 +23,7 @@ function App() {
           <Route path="user/create" element={<CreateUser />} />
           <Route path="/doctor/create" element={<CreateDoctor />} />
           <Route path="/:id/patient/Info" element={<PatientsInfo />} />
-          <Route path="/doctor/info" element={<DoctorsInfo />} />
+          <Route path="/:id/doctor/info" element={<DoctorsInfo />} />
           <Route path="/admin/info" element={<AdminInfo />} />
           <Route path="/:id/appointment" element={<CreateApp />} />
         </Routes>

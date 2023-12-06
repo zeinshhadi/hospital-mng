@@ -32,7 +32,7 @@ const LogIn = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container d-flex d-center d-direction">
       <form onSubmit={handleLogin} className="form-container">
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" onChange={handleChange} required />

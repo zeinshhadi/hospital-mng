@@ -20,9 +20,8 @@ const LogIn = () => {
 
     try {
       const response = await axios.post("http://localhost/hospital-mng/backend/patients/signin.php", formData);
-      console.log(response.data);
+
       if (response.data.status === "success") {
-        console.log(response.data.role);
         navigate(`/${response.data.user_id}/patient/Info/`);
       }
     } catch (error) {
@@ -31,7 +30,7 @@ const LogIn = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container d-flex d-center d-direction">
       <form onSubmit={handleLogin} className="form-container">
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" onChange={handleChange} required />
@@ -40,13 +39,13 @@ const LogIn = () => {
         <input type="password" id="password" name="password" onChange={handleChange} required />
 
         <button type="submit">Login</button>
+        <p className="d-flex d-start">
+          Don't have an account?{" "}
+          <a href="/user/create" className="signup-link">
+            Sign up
+          </a>
+        </p>
       </form>
-      <p>
-        Don't have an account?{" "}
-        <a href="/user/create" className="signup-link">
-          Sign up
-        </a>
-      </p>
     </div>
   );
 };

@@ -40,14 +40,14 @@ const CreateApp = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="doctor_id">Doctor:</label>
+        <label htmlFor="doctor_id">Choose doctor:</label>
         <select id="doctor_id" name="doctor_id" value={formData.doctor_id} onChange={handleChange} required>
           <option value="" disabled>
             Select Doctor
           </option>
           {doctors.map((doctor) => (
             <option key={doctor.doctor_id} value={doctor.doctor_id}>
-              {doctor.first_name} {doctor.last_name}
+              {doctor.first_name} {doctor.specialization}
             </option>
           ))}
         </select>

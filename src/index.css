@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .d-flex {
@@ -10,5 +11,19 @@ body {
 
 .d-spacearound {
   justify-content: space-around;
+  align-items: center;
+  gap: 15%;
+}
+
+.d-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.d-direction {
+  flex-direction: column;
+}
+.d-start {
+  justify-content: start;
   align-items: center;
 }
