@@ -9,12 +9,12 @@ if (isset($data["email"], $data["password"])) {
 
     $email = $data["email"];
     $password = $data["password"];
-$query = $mysqli->prepare("select patients_id, first_name,email, password,role_id FROM patients WHERE email = ?");
+$query = $mysqli->prepare("select patients_id, first_name,email, password FROM patients WHERE email = ?");
     $query->bind_param('s', $email);
     $query->execute();
     $query->store_result();
     $num_row = $query->num_rows;
-    $query->bind_result($id, $name, $email, $hashed_password,$role);
+    $query->bind_result($id, $name, $email, $hashed_password);
     $query->fetch();
 
     $response = [];
@@ -29,7 +29,7 @@ $query = $mysqli->prepare("select patients_id, first_name,email, password,role_i
             $response['status'] = 'success';
             $response['user_id'] = $id;
             $response['name'] = $name;
-            $response["role"]=$role;
+         
         } else {
             $response['status'] = 'error';
             $response['message'] = 'Wrong inputs';
