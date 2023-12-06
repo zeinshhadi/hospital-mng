@@ -3,7 +3,7 @@ import axios from "axios";
 
 const DoctorsList = () => {
   const [doctors, setDoctors] = useState([]);
-  const [loading, setLoading] = useState(true);
+
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -11,11 +11,9 @@ const DoctorsList = () => {
       .get("http://localhost/hospital-mng/backend/doctors/get_doctors.php")
       .then(function (res) {
         setDoctors(res.data);
-        setLoading(false);
       })
       .catch(function (error) {
         setError(error);
-        setLoading(false);
       });
   }, []);
 
@@ -46,12 +44,8 @@ const DoctorsList = () => {
     console.log(`Edit doctor with ID: ${doctorId}`);
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return <p>{error.message}</p>;
   }
 
   return (
